@@ -680,7 +680,7 @@ return(t)?(($.isNumeric(t))?t:'"'+t+'"'):0;}});$.fbuilder.controls['fCalculated'
 {$.fbuilder.calculator.addEquation(me.name,eq,configuration,dependencies,me.form_identifier);}
 var e=$('[id="'+me.name+'"]');if(me.readonly==false&&me.noEvalIfManual)e.bind('keyup',function(){e.data('manually',1);});e.bind('calcualtedfield_changed',{obj:me},function(evt){if($.fbuilder['calculator'].getDepList(evt.data.obj.name,{value:evt.data.obj.val(),raw:evt.data.obj.val(true)},evt.data.obj.dependencies))
 {$.fbuilder.showHideDep({'formIdentifier':evt.data.obj.form_identifier,'fieldIdentifier':evt.data.obj.name});}}).on('keyup',function(){me.manual=true;}).on('change',function(){if('manual'in me&&me.manual&&me.formatDynamically)
-{me.manual=false;var v=me.val();this.value=$.fbuilder.calculator.format(v,configuration);}});},showHideDep:function(toShow,toHide,hiddenByContainer)
+{me.manual=false;var v=me.val();this.value=$.fbuilder.calculator.format(v,configuration);}});$('#cp_calculatedfieldsf_pform'+me.form_identifier).bind('reset',function(){me.manua=false;});},showHideDep:function(toShow,toHide,hiddenByContainer)
 {var me=this,result=[];if($.fbuilder['calculator'].getDepList(me.name,{value:me.val(),raw:me.val(true)},me.dependencies))
 {var item=$('#'+me.name),identifier=me.form_identifier,isHidden=(typeof toHide[me.name]!='undefined'||typeof hiddenByContainer[me.name]!='undefined'),d,n,dep,clearRef=function(id){if(typeof toShow[id]!='undefined')
 {delete toShow[id]['ref'][me.name];if($.isEmptyObject(toShow[id]['ref']))
@@ -778,7 +778,7 @@ $(form).trigger('cpcff_default_calc');}},Calculate:function(field)
 {field.trigger('calcualtedfield_changed');field.change();}
 field.data('bk',field.val());}}
 this.processing_queue=false;if(!this.thereIsPending(fSec))$(document).trigger('equationsQueueEmpty',[fSec]);},format:function(value,config)
-{config=Object.assign({},config);if(!/^\s*$/.test(value))
+{config=$.extend({},config);if(!/^\s*$/.test(value))
 {var symbol='',isNumeric=false;if($.isNumeric(value)&&!/[+\-]?(?:0|[1-9]\d*)(?:\.\d*)?(?:[eE][+\-]?\d+)/.test(value))
 {isNumeric=true;if(value<0)symbol='-';var parts=value.toString().replace("-","").split("."),counter=0,str='';if(config.groupingsymbol)
 {for(var i=parts[0].length-1;i>=0;i--){counter++;str=parts[0][i]+str;if(counter%3==0&&i!=0)str=config.groupingsymbol+str;}
