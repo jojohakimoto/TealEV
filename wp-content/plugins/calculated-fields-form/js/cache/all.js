@@ -175,13 +175,13 @@ if('showHideDep'in items[i])
 catch(err){}}
 f.attr('data-evalequations',o.evalequations);$.fbuilder.showHideDep({'formIdentifier':o.identifier});}}};$.fn.fbuilder=function(options){var opt=$.extend({},{pub:false,identifier:"",title:""},options,true);opt.messages=$.extend({previous:"Previous",next:"Next",pageof:"Page {0} of {0}",required:"This field is required.",email:"Please enter a valid email address.",datemmddyyyy:"Please enter a valid date with this format(mm/dd/yyyy)",dateddmmyyyy:"Please enter a valid date with this format(dd/mm/yyyy)",number:"Please enter a valid number.",digits:"Please enter only digits.",maxlength:"Please enter no more than {0} characters.",minlength:"Please enter at least {0} characters.",equalTo:"Please enter the same value again.",max:"Please enter a value less than or equal to {0}.",min:"Please enter a value greater than or equal to {0}.",currency:"Please enter a valid currency value."},(opt.messages||{}));opt.messages.max=$.validator.format(opt.messages.max);opt.messages.min=$.validator.format(opt.messages.min);opt.messages.maxlength=$.validator.format(opt.messages.maxlength);opt.messages.minlength=$.validator.format(opt.messages.minlength);$.extend($.validator.messages,opt.messages);$("#cp_calculatedfieldsf_pform"+fnum).validate({ignore:".ignore,.ignorepb",errorElement:"div",errorPlacement:function(e,element)
 {var _parent=element.closest('.dfield'),_uh=_parent.find('span.uh:visible');e.addClass('message').css('position','absolute').appendTo((_uh.length)?_uh:_parent);}}).messages=opt.messages;var items=[],fieldsIndex={},reloadItemsPublic=function()
-{var form_tag=$("#cp_calculatedfieldsf_pform"+opt.identifier),fieldlist_tag=$("#fieldlist"+opt.identifier),page_tag,i=0,page=0,getCaptchaHTML=function(){var captcha_tag=$("#cpcaptchalayer"+opt.identifier+':not(:empty)')
+{var form_tag=$("#cp_calculatedfieldsf_pform"+opt.identifier),header_tag=$("#formheader"+opt.identifier),fieldlist_tag=$("#fieldlist"+opt.identifier),page_tag,i=0,page=0,getCaptchaHTML=function(){var captcha_tag=$("#cpcaptchalayer"+opt.identifier+':not(:empty)')
 html='';if(captcha_tag.length)
 {html+='<div class="captcha">'+captcha_tag.html()+'</div><div class="clearer"></div>';captcha_tag.remove();}
 return html;},getSubmitHTML=function(){var submit_tag=$("#cp_subbtn"+opt.identifier+':not(:empty)'),html='';if(submit_tag.length)
 {html+='<div class="pbSubmit" tabindex="0">'+submit_tag.html()+'</div>';submit_tag.remove();}
 return html;};form_tag.addClass(theForm.formtemplate);if(!opt.cached)
-{page_tag=$('<div class="pb'+page+' pbreak" page="'+page+'"></div>');fieldlist_tag.addClass(theForm.formlayout).html(theForm.show()).append(page_tag);for(i;i<items.length;i++)
+{page_tag=$('<div class="pb'+page+' pbreak" page="'+page+'"></div>');header_tag.html(theForm.show());fieldlist_tag.addClass(theForm.formlayout).append(page_tag);for(i;i<items.length;i++)
 {items[i].index=i;if(items[i].ftype=="fPageBreak")
 {page++;page_tag=$('<div class="pb'+page+' pbreak" page="'+page+'"></div>');fieldlist_tag.append(page_tag);}
 else
